@@ -191,8 +191,6 @@
     .promo-divider-dot{font-size:.7rem;color:var(--sage)}
     .promo-cta{width:100%;padding:.9rem;border-radius:50px;border:none;background:linear-gradient(135deg,#5a7a5e,#3d5c41);color:#fff;font-family:'Heebo',sans-serif;font-size:.97rem;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(90,122,94,.4);transition:all .2s;margin-bottom:.7rem}
     .promo-cta:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(90,122,94,.5)}
-    .promo-close-link{font-size:.78rem;color:var(--muted);cursor:pointer;text-decoration:underline;text-underline-offset:3px;transition:color .2s}
-    .promo-close-link:hover{color:var(--mid)}
     #promo-close{position:absolute;top:.85rem;left:.85rem;width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s;line-height:1}
     #promo-close:hover{background:rgba(255,255,255,.35)}
     .promo-note{font-size:.7rem;color:var(--muted);margin-top:.3rem}
@@ -217,9 +215,8 @@
       <span class="promo-icon">📖</span>
       <div class="promo-title">הנחה לציבור לומדי התורה</div>
       <div class="promo-divider"><span class="promo-divider-line"></span><span class="promo-divider-dot">🌿</span><span class="promo-divider-line"></span></div>
-      <p class="promo-desc">כבוד התורה וכבוד הגוף — יחד.<br>הצג כרטיס תלמיד ישיבה / כולל<br>ותקבל <strong>15% הנחה</strong> על כל טיפול.</p>
+      <p class="promo-desc">כבוד התורה וכבוד הגוף — יחד.<br>ותקבל <strong>15% הנחה</strong> על כל טיפול.</p>
       <button class="promo-cta" onclick="promoBook()">📅 קבע תור עכשיו</button>
-      <div><span class="promo-close-link" onclick="closePromo()">המשך ללא הנחה</span></div>
       <p class="promo-note">ההנחה בתיאום מראש בלבד</p>
     </div>
   </div>
@@ -487,7 +484,7 @@ function pickDay(y,m,d){
 function drawSlots(){
   document.getElementById('tgrid').innerHTML = SLOTS.map(function(t){
     var tk = TAKEN.indexOf(t)>-1;
-    return '<button class="ts'+(tk?' sel':''+'" '+(tk?'disabled':'')+' onclick="pickTime(this,\''+t+'\')">')+t+'</button>';
+    return '<button class="ts'+(tk?' sel':'')+'" '+(tk?'disabled':'')+' onclick="pickTime(this,\''+t+'\')">' +t+'</button>';
   }).join('');
 }
 
@@ -578,6 +575,7 @@ function sendWA(){
     '📧 מייל: '+email+
     (ph?'\n📞 '+ph:'')+
     (nt?'\n📝 '+nt:'')+
+    (_fromBanner?'\n\nאני תלמיד ישיבה':'')+
     '\n\nתודה!';
   openWA(msg);
 
@@ -588,7 +586,7 @@ function sendWA(){
 }
 
 function resetAll(){
-  S.date=null; S.time=null; S.loc='ביקור בבית הלקוח';
+  S.date=null; S.time=null; S.loc='ביקור בבית הלקוח'; _fromBanner=false;
   document.getElementById('iName').value='';
   document.getElementById('iEmail').value='';
   document.getElementById('iAddr').value='';
@@ -603,12 +601,14 @@ function resetAll(){
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
+var _fromBanner = false;
 function closePromo(){
   var ov=document.getElementById('promo-overlay');
   ov.classList.add('hide');
   setTimeout(function(){ov.style.display='none';},360);
 }
 function promoBook(){
+  _fromBanner = true;
   closePromo();
   setTimeout(function(){document.getElementById('booking').scrollIntoView({behavior:'smooth'});},300);
 }
