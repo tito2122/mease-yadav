@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>מעסה ידיו | עיסוי מקצועי</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;600;700;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--sage:#5a7a5e;--sage-light:#a8c4ab;--sand:#e8dcc8;--sand-light:#f5efe3;--brown:#8b6f4e;--cream:#faf6ef;--dark:#3a2e24;--mid:#6b5a47;--muted:#9b8a77}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:'Heebo',sans-serif;background:var(--cream);color:var(--dark);direction:rtl;overflow-x:hidden}
+
+    .hero{min-height:100svh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem 4rem;overflow:hidden;background:linear-gradient(155deg,#ede4d0,#ddd0b8 45%,#cfc4a8)}
+    .hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 55% at 50% 25%,rgba(122,158,126,.22),transparent 65%),radial-gradient(ellipse 50% 40% at 15% 85%,rgba(139,111,78,.15),transparent 55%)}
+    .bot{position:absolute;pointer-events:none}
+    .bot-tr{top:-10px;right:-10px;width:220px;height:220px;opacity:.5}
+    .bot-bl{bottom:-10px;left:-10px;width:180px;height:180px;opacity:.4;transform:rotate(180deg)}
+    .hero-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(90,122,94,.14);border:1px solid rgba(90,122,94,.35);border-radius:50px;padding:.45rem 1.25rem;font-size:.78rem;font-weight:600;color:var(--sage);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem;animation:fadeUp .9s ease both}
+    .emblem{width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.45);backdrop-filter:blur(6px);border:2px solid rgba(122,158,126,.35);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:1.3rem;box-shadow:0 8px 30px rgba(90,122,94,.18);animation:fadeUp .9s .1s ease both}
+    h1{font-family:'Noto Serif Hebrew',serif;font-size:clamp(3rem,11vw,5.5rem);font-weight:900;color:var(--dark);line-height:1.05;letter-spacing:-.025em;animation:fadeUp .9s .2s ease both}
+    h1 span{color:var(--sage)}
+    .sub{font-family:'Noto Serif Hebrew',serif;font-size:clamp(1rem,3.5vw,1.2rem);font-weight:400;color:var(--mid);margin-top:.5rem;animation:fadeUp .9s .3s ease both}
+    .orn{display:flex;align-items:center;gap:.8rem;margin:1.8rem 0;animation:fadeUp .9s .4s ease both}
+    .orn-line{height:1px;width:55px;background:linear-gradient(to left,rgba(122,158,126,.6),transparent)}
+    .orn-line.r{background:linear-gradient(to right,rgba(122,158,126,.6),transparent)}
+    .tagline{font-family:'Noto Serif Hebrew',serif;font-size:clamp(1rem,3.5vw,1.2rem);font-weight:400;color:var(--brown);font-style:italic;max-width:340px;line-height:1.7;animation:fadeUp .9s .5s ease both}
+    .cta-row{display:flex;flex-direction:column;gap:.9rem;width:100%;max-width:320px;margin-top:2rem;animation:fadeUp .9s .6s ease both}
+
+    .btn{display:flex;align-items:center;justify-content:center;gap:.6rem;padding:.95rem 1.4rem;border-radius:50px;font-family:'Heebo',sans-serif;font-size:1rem;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+    .btn:active{transform:scale(.97)!important}
+    .btn-wa{background:linear-gradient(135deg,#2ecc71,#1aab54);color:#fff;box-shadow:0 6px 20px rgba(37,211,102,.38)}
+    .btn-wa:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.52)}
+    .btn-mail{background:linear-gradient(135deg,#f06040,#c5221f);color:#fff;box-shadow:0 6px 20px rgba(234,67,53,.32)}
+    .btn-mail:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(234,67,53,.46)}
+    .btn-book{background:linear-gradient(135deg,#8b6f4e,#6b4f2e);color:#fff;box-shadow:0 6px 20px rgba(139,111,78,.4)}
+    .btn-book:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(139,111,78,.55)}
+
+    .strip{background:var(--sage);display:flex;justify-content:center;flex-wrap:wrap}
+    .svc{display:flex;flex-direction:column;align-items:center;gap:.4rem;padding:1.3rem 1.1rem;flex:1 1 100px;border-left:1px solid rgba(255,255,255,.12);transition:background .2s}
+    .svc:last-child{border-left:none}
+    .svc:hover{background:rgba(255,255,255,.08)}
+    .svc-icon{font-size:1.4rem}
+    .svc-name{font-size:.7rem;font-weight:500;color:rgba(255,255,255,.9);text-align:center}
+
+    .book-section{padding:4rem 1.5rem;background:linear-gradient(175deg,var(--cream),var(--sand-light))}
+    .book-wrap{max-width:600px;margin:0 auto}
+    .sec-label{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);background:rgba(90,122,94,.1);padding:.3rem .85rem;border-radius:50px;margin-bottom:.8rem}
+    .sec-title{font-family:'Noto Serif Hebrew',serif;font-size:clamp(1.6rem,6vw,2.2rem);font-weight:700;color:var(--dark);line-height:1.3;margin-bottom:.4rem}
+    .sec-sub{font-size:.9rem;color:var(--muted);margin-bottom:1.8rem}
+
+    .book-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 8px 40px rgba(139,111,78,.12)}
+    .steps-bar{display:flex;align-items:center;justify-content:center;gap:.6rem;background:var(--sage);padding:.9rem 1.5rem}
+    .step-lbl{font-size:.75rem;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:.06em}
+    .step-sep{color:rgba(255,255,255,.3)}
+    .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.3);transition:all .3s}
+    .dot.on{background:#fff;transform:scale(1.3)}
+    .dot.done{background:rgba(255,255,255,.65)}
+
+    .panel{display:none;padding:1.6rem}
+    .panel.on{display:block;animation:slideIn .3s ease both}
+    @keyframes slideIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+    .ph{font-family:'Noto Serif Hebrew',serif;font-size:1.15rem;font-weight:700;color:var(--dark);margin-bottom:1.2rem;display:flex;align-items:center;gap:.55rem}
+
+    .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+    .cal-month{font-family:'Noto Serif Hebrew',serif;font-size:.98rem;font-weight:700;color:var(--dark)}
+    .nav-btn{width:34px;height:34px;border-radius:50%;border:none;background:rgba(90,122,94,.1);color:var(--sage);cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+    .nav-btn:hover{background:rgba(90,122,94,.22)}
+    .wdays{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:.35rem}
+    .wd{font-size:.65rem;font-weight:700;color:var(--muted);text-align:center;padding:.25rem 0}
+    .cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:.22rem}
+    .cd{aspect-ratio:1;border-radius:9px;border:none;background:transparent;font-size:.85rem;font-weight:500;color:var(--mid);cursor:pointer;transition:all .17s;display:flex;align-items:center;justify-content:center;position:relative}
+    .cd:hover:not([disabled]):not(.empty){background:rgba(90,122,94,.12);color:var(--sage)}
+    .cd.today{font-weight:700;color:var(--sage)}
+    .cd.today::after{content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--sage)}
+    .cd.sel{background:var(--sage)!important;color:#fff!important;font-weight:700;box-shadow:0 3px 12px rgba(90,122,94,.4)}
+    .cd.sel::after{background:#fff}
+    .cd[disabled]{color:rgba(155,138,119,.3);cursor:not-allowed}
+    .cd.empty{cursor:default}
+
+    .tgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem}
+    .ts{border:1.5px solid rgba(90,122,94,.25);border-radius:10px;padding:.5rem .2rem;text-align:center;font-size:.82rem;font-weight:600;color:var(--sage);cursor:pointer;background:transparent;transition:all .17s}
+    .ts:hover:not([disabled]){background:rgba(90,122,94,.1);border-color:var(--sage)}
+    .ts.sel{background:var(--sage);color:#fff;border-color:var(--sage);box-shadow:0 3px 10px rgba(90,122,94,.35)}
+    .ts[disabled]{color:rgba(155,138,119,.35);border-color:rgba(155,138,119,.18);cursor:not-allowed;background:rgba(155,138,119,.05)}
+
+    .locs{display:flex;flex-direction:column;gap:.7rem}
+    .loc{display:flex;align-items:center;gap:.9rem;padding:.95rem 1.1rem;border-radius:14px;border:2px solid rgba(90,122,94,.2);cursor:pointer;background:transparent;transition:all .2s;text-align:right;width:100%}
+    .loc:hover{border-color:var(--sage);background:rgba(90,122,94,.06)}
+    .loc.sel{border-color:var(--sage);background:rgba(90,122,94,.1)}
+    .loc-ico{font-size:1.5rem;flex-shrink:0}
+    .loc-name{font-size:.93rem;font-weight:700;color:var(--dark)}
+    .loc-desc{font-size:.75rem;color:var(--muted);margin-top:.12rem}
+    .loc-chk{margin-right:auto;width:22px;height:22px;border-radius:50%;border:2px solid rgba(90,122,94,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s;font-size:.72rem}
+    .loc.sel .loc-chk{background:var(--sage);border-color:var(--sage);color:#fff}
+
+    .fg{margin-bottom:1rem}
+    .fl{display:block;font-size:.78rem;font-weight:700;color:var(--mid);margin-bottom:.35rem;letter-spacing:.05em}
+    .fi{width:100%;padding:.78rem 1rem;border-radius:12px;border:1.5px solid rgba(90,122,94,.25);font-family:'Heebo',sans-serif;font-size:.93rem;color:var(--dark);background:#fff;direction:rtl;outline:none;transition:border-color .2s,box-shadow .2s}
+    .fi:focus{border-color:var(--sage);box-shadow:0 0 0 3px rgba(90,122,94,.1)}
+    .fi::placeholder{color:rgba(155,138,119,.55)}
+
+    .sum-box{background:rgba(90,122,94,.08);border:1.5px solid rgba(90,122,94,.2);border-radius:14px;padding:1.1rem;margin-bottom:1.3rem}
+    .sum-row{display:flex;align-items:center;gap:.55rem;padding:.35rem 0;border-bottom:1px solid rgba(90,122,94,.1);font-size:.88rem;color:var(--mid)}
+    .sum-row:last-child{border-bottom:none}
+    .sum-lbl{font-weight:700;color:var(--dark)}
+
+    .send-btn{width:100%;padding:1rem;border-radius:50px;border:none;background:linear-gradient(135deg,#2ecc71,#1aab54);color:#fff;font-family:'Heebo',sans-serif;font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.65rem;box-shadow:0 6px 22px rgba(37,211,102,.4);transition:all .2s}
+    .send-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.55)}
+
+    .pnav{display:flex;gap:.7rem;margin-top:1.4rem;justify-content:space-between}
+    .btn-next{flex:1;padding:.85rem;border-radius:50px;border:none;background:linear-gradient(135deg,var(--sage),#3d5c41);color:#fff;font-family:'Heebo',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;box-shadow:0 5px 18px rgba(90,122,94,.35);transition:all .2s}
+    .btn-next:hover:not([disabled]){transform:translateY(-2px);box-shadow:0 8px 24px rgba(90,122,94,.45)}
+    .btn-next[disabled]{opacity:.4;cursor:not-allowed;transform:none!important}
+    .btn-back{padding:.85rem 1.2rem;border-radius:50px;border:1.5px solid rgba(90,122,94,.3);background:transparent;color:var(--sage);font-family:'Heebo',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-back:hover{background:rgba(90,122,94,.08)}
+
+    .confirm-card{background:linear-gradient(135deg,rgba(90,122,94,.12),rgba(90,122,94,.06));border:1.5px solid rgba(90,122,94,.25);border-radius:16px;padding:1.1rem 1.3rem;margin:1rem 0 .5rem;width:100%;max-width:280px;text-align:right}
+    .confirm-row{display:flex;align-items:center;gap:.6rem;padding:.3rem 0;font-size:.88rem;color:var(--mid);border-bottom:1px solid rgba(90,122,94,.1)}
+    .confirm-row:last-child{border-bottom:none}
+    .confirm-row span:first-child{font-size:1rem;flex-shrink:0}
+    .confirm-lbl{font-weight:700;color:var(--dark);margin-left:.2rem}
+    .success{display:none;padding:2.5rem 1.5rem;text-align:center;flex-direction:column;align-items:center}
+    .success.on{display:flex;animation:slideIn .5s ease both}
+    .success-ico{font-size:3.8rem;margin-bottom:1rem}
+    .success-t{font-family:'Noto Serif Hebrew',serif;font-size:1.45rem;font-weight:700;color:var(--dark);margin-bottom:.5rem}
+    .success-p{font-size:.9rem;color:var(--mid);line-height:1.75;max-width:270px}
+    .btn-reset{margin-top:1.4rem;padding:.75rem 1.6rem;border-radius:50px;border:1.5px solid var(--sage);background:transparent;color:var(--sage);font-family:'Heebo',sans-serif;font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-reset:hover{background:rgba(90,122,94,.1)}
+
+    .rev-section{background:linear-gradient(175deg,#ede6d6,var(--sand-light));padding:4rem 1.5rem}
+    .rev-hdr{text-align:center;margin-bottom:2rem}
+    .rev-grid{max-width:600px;margin:0 auto;display:flex;flex-direction:column;gap:1.2rem}
+    .rev-card{background:#fff;border-radius:20px;padding:1.6rem;box-shadow:0 4px 20px rgba(139,111,78,.09);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .rev-card::before{content:'"';font-family:'Noto Serif Hebrew',serif;position:absolute;top:.4rem;left:1.2rem;font-size:4.5rem;line-height:1;color:var(--sage-light);opacity:.45;pointer-events:none;user-select:none}
+    .rev-card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(139,111,78,.15)}
+    .stars{color:#f4b942;font-size:1rem;letter-spacing:.07em;margin-bottom:.7rem}
+    .rev-txt{font-size:.95rem;line-height:1.85;color:var(--mid);font-style:italic}
+    .rev-by{margin-top:1rem;display:flex;align-items:center;gap:.7rem}
+    .av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;color:#fff;flex-shrink:0}
+    .rname{font-weight:700;font-size:.88rem;color:var(--dark)}
+    .rdate{font-size:.72rem;color:var(--muted)}
+
+    footer{background:var(--dark);color:var(--sand-light);padding:3rem 1.5rem 2rem;text-align:center}
+    .flogo{font-family:'Noto Serif Hebrew',serif;font-size:1.9rem;font-weight:700;color:var(--sand);margin-bottom:.3rem}
+    .fsub{font-size:.8rem;color:var(--muted);margin-bottom:2rem;letter-spacing:.05em}
+    .fcards{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;max-width:380px;margin:0 auto 2rem}
+    .fcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:1rem;text-align:center}
+    .fcard-ico{font-size:1.3rem;margin-bottom:.35rem}
+    .fcard-t{font-size:.62rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sage-light);margin-bottom:.45rem}
+    .fcard-c{font-size:.83rem;line-height:1.8;color:rgba(245,239,227,.75)}
+    .fcard-c a{color:inherit;text-decoration:none;transition:color .2s;cursor:pointer}
+    .fcard-c a:hover{color:var(--sage-light)}
+    .fdiv{height:1px;background:rgba(255,255,255,.08);max-width:380px;margin:0 auto 1.3rem}
+    .fcp{font-size:.71rem;color:rgba(245,239,227,.35)}
+
+    #fab{position:fixed;bottom:1.4rem;left:1.4rem;width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#2ecc71,#1aab54);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 22px rgba(37,211,102,.5);z-index:200;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s;animation:pulse 2.8s infinite}
+    #fab:hover{transform:scale(1.1);box-shadow:0 10px 30px rgba(37,211,102,.65)}
+    #fab svg{width:28px;height:28px;fill:#fff}
+    @keyframes pulse{0%,100%{box-shadow:0 6px 22px rgba(37,211,102,.5)}50%{box-shadow:0 6px 30px rgba(37,211,102,.7),0 0 0 10px rgba(37,211,102,.1)}}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+    .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+    .reveal.in{opacity:1;transform:none}
+    .d1{transition-delay:.1s}.d2{transition-delay:.2s}
+
+    @media(min-width:480px){.cta-row{flex-direction:row;max-width:420px}.tgrid{grid-template-columns:repeat(5,1fr)}}
+  </style>
+</head>
+<body>
+
+<!-- FAB -->
+<button id="fab" onclick="openWA()" aria-label="וואטסאפ">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.894L.05 24l6.242-1.455A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.966a9.938 9.938 0 01-5.116-1.341l-.367-.208-3.8.886.899-3.618-.228-.354A9.92 9.92 0 012.034 12C2.034 6.495 6.495 2.034 12 2.034S21.966 6.495 21.966 12 17.505 21.966 12 21.966z"/></svg>
+</button>
+
+<!-- HERO -->
+<header class="hero">
+  <svg class="bot bot-tr" viewBox="0 0 220 220" fill="none">
+    <path d="M200,12 Q140,70 115,115 Q90,160 42,210" stroke="#5a7a5e" stroke-width="1.7" opacity=".5"/>
+    <path d="M136,115 Q168,92 188,115 Q168,138 136,115" stroke="#7a9e7e" stroke-width="1.1" fill="#7a9e7e" fill-opacity=".17" opacity=".5"/>
+    <path d="M115,143 Q148,120 168,143 Q148,166 115,143" stroke="#7a9e7e" stroke-width="1" fill="#7a9e7e" fill-opacity=".13" opacity=".42"/>
+    <circle cx="136" cy="114" r="2.8" fill="#7a9e7e" opacity=".38"/>
+  </svg>
+  <svg class="bot bot-bl" viewBox="0 0 220 220" fill="none">
+    <path d="M200,12 Q140,70 115,115 Q90,160 42,210" stroke="#5a7a5e" stroke-width="1.7" opacity=".5"/>
+    <path d="M136,115 Q168,92 188,115 Q168,138 136,115" stroke="#7a9e7e" stroke-width="1.1" fill="#7a9e7e" fill-opacity=".17" opacity=".5"/>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="badge">✦ מטפל מוסמך ומנוסה ✦</div>
+    <div class="emblem">🪷</div>
+    <h1>מעסה <span>ידיו</span></h1>
+    <p class="sub">עיסוי רפואי ומרגיע לגוף ולנפש</p>
+    <div class="orn">
+      <span class="orn-line"></span>
+      <span style="font-size:1rem;color:var(--sage)">🌿</span>
+      <span class="orn-line r"></span>
+    </div>
+    <p class="tagline">קחו רגע לעצמכם — לשחרר מתחים,<br>להפיג כאבים ולהטעין את האנרגיות מחדש.</p>
+    <div class="cta-row">
+      <button class="btn btn-book" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">📅&nbsp; קבע תור</button>
+      <button class="btn btn-wa" onclick="openWA()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.894L.05 24l6.242-1.455A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.966a9.938 9.938 0 01-5.116-1.341l-.367-.208-3.8.886.899-3.618-.228-.354A9.92 9.92 0 012.034 12C2.034 6.495 6.495 2.034 12 2.034S21.966 6.495 21.966 12 17.505 21.966 12 21.966z"/></svg>
+        וואטסאפ
+      </button>
+      <button class="btn btn-mail" onclick="openMail()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        אימייל
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- SERVICES STRIP -->
+<div class="strip">
+  <div class="svc"><span class="svc-icon">🫁</span><span class="svc-name">עיסוי שוודי</span></div>
+  <div class="svc"><span class="svc-icon">🫧</span><span class="svc-name">כוסות רוח</span></div>
+  <div class="svc"><span class="svc-icon">💆</span><span class="svc-name">רקמות עמוק</span></div>
+  <div class="svc"><span class="svc-icon">🌸</span><span class="svc-name">עיסוי ספורטאים</span></div>
+</div>
+
+<!-- BOOKING -->
+<section class="book-section" id="booking">
+  <div class="book-wrap">
+    <div class="reveal">
+      <div class="sec-label">קביעת תור</div>
+      <h2 class="sec-title">בחר את הזמן שלך</h2>
+      <p class="sec-sub">4 שלבים קצרים — ותישלח הודעה מוכנה לוואטסאפ 💬</p>
+    </div>
+    <div class="book-card reveal d1">
+      <div class="steps-bar">
+        <span class="step-lbl" id="stepLbl">שלב 1 מתוך 3</span>
+        <span class="step-sep">·</span>
+        <div class="dot on" id="d1"></div>
+        <div class="dot" id="d2"></div>
+        <div class="dot" id="d3"></div>
+        <div class="dot" id="d4"></div>
+      </div>
+
+      <!-- Step 1: Day -->
+      <div class="panel on" id="p1">
+        <div class="ph">📅 בחר יום לטיפול</div>
+        <div class="cal-nav">
+          <button class="nav-btn" id="prevM">›</button>
+          <span class="cal-month" id="mLabel"></span>
+          <button class="nav-btn" id="nextM">‹</button>
+        </div>
+        <div class="wdays" id="wdays"></div>
+        <div class="cgrid" id="cgrid"></div>
+        <div class="pnav">
+          <button class="btn-next" id="to2" disabled>המשך לבחירת שעה ←</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Time -->
+      <div class="panel" id="p2">
+        <div class="ph">🕐 בחר שעה</div>
+        <div class="tgrid" id="tgrid"></div>
+        <div class="pnav">
+          <button class="btn-back" onclick="goTo(1)">→ חזור</button>
+          <button class="btn-next" id="to3" disabled>המשך לפרטים ←</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Location -->
+      <div class="panel" id="p3">
+        <div class="ph">📍 מיקום הטיפול</div>
+        <div class="locs">
+          <button class="loc sel" data-v="ביקור בבית הלקוח" onclick="pickLoc(this)">
+            <span class="loc-ico">🏠</span>
+            <div><div class="loc-name">ביקור בבית הלקוח</div><div class="loc-desc">אני מגיע אליך — נוחות מלאה</div></div>
+            <div class="loc-chk">✓</div>
+          </button>
+        </div>
+        <div class="pnav">
+          <button class="btn-back" onclick="goTo(2)">→ חזור</button>
+          <button class="btn-next" id="to4">המשך לפרטים ←</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Details -->
+      <div class="panel" id="p4">
+        <div class="ph">✏️ הפרטים שלך</div>
+        <div class="fg"><label class="fl">שם מלא *</label><input class="fi" id="iName" type="text" placeholder="ישראל ישראלי" oninput="refreshSum()"></div>
+        <div class="fg"><label class="fl">מייל לקבלת אישור *</label><input class="fi" id="iEmail" type="email" placeholder="example@gmail.com"></div>
+        <div class="fg"><label class="fl">כתובת מלאה *</label><input class="fi" id="iAddr" type="text" placeholder="רחוב, מספר בית, עיר" oninput="refreshSum()"></div>
+        <div class="fg"><label class="fl">מספר טלפון (אופציונלי)</label><input class="fi" id="iPhone" type="tel" placeholder="050-000-0000"></div>
+        <div class="fg"><label class="fl">הערות / בקשות מיוחדות</label><input class="fi" id="iNote" type="text" placeholder="לדוגמה: עיסוי גב עמוק..."></div>
+        <div class="sum-box">
+          <div class="sum-row"><span>📅</span><span class="sum-lbl">יום:</span><span id="sDay">—</span></div>
+          <div class="sum-row"><span>🕐</span><span class="sum-lbl">שעה:</span><span id="sTime">—</span></div>
+          <div class="sum-row"><span>🏠</span><span class="sum-lbl">כתובת:</span><span id="sAddr">—</span></div>
+          <div class="sum-row"><span>👤</span><span class="sum-lbl">שם:</span><span id="sName">—</span></div>
+        </div>
+        <button class="send-btn" onclick="sendWA()">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.122 1.532 5.894L.05 24l6.242-1.455A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.966a9.938 9.938 0 01-5.116-1.341l-.367-.208-3.8.886.899-3.618-.228-.354A9.92 9.92 0 012.034 12C2.034 6.495 6.495 2.034 12 2.034S21.966 6.495 21.966 12 17.505 21.966 12 21.966z"/></svg>
+          שלח בקשת תור בוואטסאפ
+        </button>
+        <div class="pnav" style="margin-top:.75rem"><button class="btn-back" onclick="goTo(2)">→ חזור</button></div>
+      </div>
+
+      <!-- Success -->
+      <div class="success" id="successBox">
+        <div class="success-ico">✅</div>
+        <div class="success-t">הבקשה נשלחה בהצלחה!</div>
+        <div class="confirm-card" id="confirmCard"></div>
+        <p class="success-p">וואטסאפ נפתח עם כל הפרטים.<br>מעסה ידיו יחזור אליך בהקדם לאישור 🌿</p>
+        <button class="btn-reset" onclick="resetAll()">+ קביעת תור חדש</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="rev-section">
+  <div class="rev-hdr reveal"><div class="sec-label">ביקורות</div><h2 class="sec-title">לקוחות ממליצים</h2></div>
+  <div class="rev-grid">
+    <div class="rev-card reveal">
+      <div class="stars">★★★★★</div>
+      <p class="rev-txt">"הגעתי עם כאבי גב תחתון שלא עזבו אותי שבועות. אחרי טיפול אחד הרגשתי שחרור מטורף. מעסה עם ידי זהב, סבלני ומקצועי מאוד."</p>
+      <div class="rev-by"><div class="av" style="background:var(--sage)">ר</div><div><div class="rname">רועי א.</div><div class="rdate">ינואר 2025</div></div></div>
+    </div>
+    <div class="rev-card reveal d1">
+      <div class="stars">★★★★★</div>
+      <p class="rev-txt">"אווירה מרגיעה וטיפול משחרר שאין דברים כאלה. הוא ידע בדיוק איפה לשחרר את השרירים התפוסים. ממליצה בחום לכל מי שצריך רגע של שקט."</p>
+      <div class="rev-by"><div class="av" style="background:var(--brown)">מ</div><div><div class="rname">מיכל ס.</div><div class="rdate">פברואר 2025</div></div></div>
+    </div>
+    <div class="rev-card reveal d2">
+      <div class="stars">★★★★★</div>
+      <p class="rev-txt">"מקצוען אמיתי. מקשיב לגוף ומתאים את עוצמת הלחיצות בדיוק למה שצריך. יצאתי כמו בן אדם חדש!"</p>
+      <div class="rev-by"><div class="av" style="background:#5a7a9e">ד</div><div><div class="rname">דניאל ק.</div><div class="rdate">מרץ 2025</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="flogo">מעסה ידיו</div>
+  <p class="fsub">עיסוי מקצועי | גוף ונפש</p>
+  <div class="fcards">
+    <div class="fcard">
+      <div class="fcard-ico">🕐</div>
+      <div class="fcard-t">שעות פעילות</div>
+      <div class="fcard-c">א׳–ה׳: 09:00–20:00<br>ו׳: 09:00–14:00<br>שבת: סגור</div>
+    </div>
+    <div class="fcard">
+      <div class="fcard-ico">📞</div>
+      <div class="fcard-t">יצירת קשר</div>
+      <div class="fcard-c">
+        <a href="tel:0548083194">054-808-3194</a><br>
+        <a id="mailLink" onclick="openMail()" style="cursor:pointer">לחץ לשליחת מייל</a>
+      </div>
+    </div>
+  </div>
+  <div class="fdiv"></div>
+  <p class="fcp">© 2025 מעסה ידיו · כל הזכויות שמורות</p>
+</footer>
+
+<script>
+var _ph = [57,55,50,53,52,56,48,56,51,49,57,52].map(function(c){return String.fromCharCode(c);}).join('');
+var _u  = [109,111,116,105,106,101,108,105].map(function(c){return String.fromCharCode(c);}).join('');
+var _d  = [103,109,97,105,108,46,99,111,109].map(function(c){return String.fromCharCode(c);}).join('');
+var _wa_proto = 'htt'+'ps://wa'+'.me/';
+var _ml_proto = 'mai'+'lto:';
+
+function openWA(msg) {
+  var base = _wa_proto + _ph;
+  var url  = msg ? base + '?text=' + encodeURIComponent(msg) : base;
+  window.open(url, '_blank');
+}
+function openMail() {
+  var addr = _u + '@' + _d;
+  var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (isMobile) {
+    var a = document.createElement('a');
+    a.href = _ml_proto + addr;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } else {
+    window.open('https://mail.google.com/mail/u/0/?view=cm&tf=1&to=' + addr, '_blank');
+  }
+}
+
+var S = {step:1, date:null, time:null, loc:null, yr:0, mo:0};
+var WD = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ש׳'];
+var MO = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+var SLOTS = ['09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00'];
+var TAKEN = [];
+
+(function(){
+  var t = new Date(); S.yr = t.getFullYear(); S.mo = t.getMonth();
+  S.loc = 'ביקור בבית הלקוח';
+  drawWeekdays(); drawCal(); drawSlots();
+})();
+
+function drawWeekdays(){
+  document.getElementById('wdays').innerHTML = WD.map(function(w){return '<div class="wd">'+w+'</div>';}).join('');
+}
+
+function drawCal(){
+  var y=S.yr, m=S.mo;
+  document.getElementById('mLabel').textContent = MO[m]+' '+y;
+  var first = new Date(y,m,1).getDay();
+  var last  = new Date(y,m+1,0).getDate();
+  var today = new Date(); today.setHours(0,0,0,0);
+  var html = '';
+  for(var i=0;i<first;i++) html+='<button class="cd empty" disabled></button>';
+  for(var d=1;d<=last;d++){
+    var dt  = new Date(y,m,d);
+    var sat = dt.getDay()===6;
+    var old = dt<today;
+    var now = dt.getTime()===today.getTime();
+    var sel = S.date && S.date.getTime()===dt.getTime();
+    var cls = 'cd'+(sat||old?' disabled':'')+(now?' today':'')+(sel?' sel':'');
+    html += '<button class="'+cls+'" '+(sat||old?'disabled':'')+' onclick="pickDay('+y+','+m+','+d+')">'+d+'</button>';
+  }
+  document.getElementById('cgrid').innerHTML = html;
+}
+
+document.getElementById('prevM').onclick = function(){ S.mo--; if(S.mo<0){S.mo=11;S.yr--;} drawCal(); };
+document.getElementById('nextM').onclick = function(){ S.mo++; if(S.mo>11){S.mo=0;S.yr++;} drawCal(); };
+
+function pickDay(y,m,d){
+  S.date = new Date(y,m,d); drawCal();
+  document.getElementById('to2').disabled = false;
+  refreshSum();
+}
+
+function drawSlots(){
+  document.getElementById('tgrid').innerHTML = SLOTS.map(function(t){
+    var tk = TAKEN.indexOf(t)>-1;
+    return '<button class="ts'+(tk?' sel':'')+'" '+(tk?'disabled':'')+' onclick="pickTime(this,\''+t+'\')">'+t+'</button>';
+  }).join('');
+}
+
+function pickTime(el,t){
+  document.querySelectorAll('.ts').forEach(function(b){b.classList.remove('sel');});
+  el.classList.add('sel'); S.time=t;
+  document.getElementById('to3').disabled=false;
+  refreshSum();
+}
+
+function pickLoc(el){
+  document.querySelectorAll('.loc').forEach(function(b){b.classList.remove('sel');b.querySelector('.loc-chk').textContent='';});
+  el.classList.add('sel'); el.querySelector('.loc-chk').textContent='✓';
+  S.loc = el.dataset.v;
+  document.getElementById('to4').disabled=false;
+  refreshSum();
+}
+
+document.getElementById('to2').onclick=function(){goTo(2);};
+document.getElementById('to3').onclick=function(){goTo(4);};
+document.getElementById('to4').onclick=function(){goTo(4);};
+
+function goTo(n){
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  document.getElementById('p'+n).classList.add('on');
+  S.step=n;
+  var disp = n===1?1:n===2?2:3;
+  for(var i=1;i<=4;i++){
+    var dot=document.getElementById('d'+i);
+    var ddisp = i===1?1:i===2?2:i===3?2:3;
+    dot.className='dot'+(ddisp===disp?' on':ddisp<disp?' done':'');
+  }
+  document.getElementById('stepLbl').textContent='שלב '+disp+' מתוך 3';
+  document.getElementById('booking').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function refreshSum(){
+  if(S.date){ var d=S.date; document.getElementById('sDay').textContent=WD[d.getDay()]+' '+d.getDate()+' '+MO[d.getMonth()]+' '+d.getFullYear(); }
+  if(S.time) document.getElementById('sTime').textContent=S.time;
+  if(S.loc)  document.getElementById('sAddr').textContent=S.loc;
+  var n=document.getElementById('iName'); if(n) document.getElementById('sName').textContent=n.value||'—';
+}
+
+var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwPdaS2eK-qYm052fFlflF_IbTwutPzRRNQbkWD-HxYIUe_4q_fq2cF1jG6EpF_q4H6/exec';
+
+function sendWA(){
+  var name  = (document.getElementById('iName').value||'').trim();
+  var email = (document.getElementById('iEmail').value||'').trim();
+  var addr  = (document.getElementById('iAddr').value||'').trim();
+
+  if(!name){
+    var fi=document.getElementById('iName'); fi.style.borderColor='#e05533'; fi.focus();
+    setTimeout(function(){fi.style.borderColor='';},2000); return;
+  }
+  if(!email || email.indexOf('@')===-1){
+    var fi=document.getElementById('iEmail'); fi.style.borderColor='#e05533'; fi.focus();
+    setTimeout(function(){fi.style.borderColor='';},2000); return;
+  }
+  if(!addr){
+    var fi=document.getElementById('iAddr'); fi.style.borderColor='#e05533'; fi.focus();
+    setTimeout(function(){fi.style.borderColor='';},2000); return;
+  }
+
+  var d  = S.date;
+  var ds = WD[d.getDay()]+' '+d.getDate()+' '+MO[d.getMonth()]+' '+d.getFullYear();
+  var ph = (document.getElementById('iPhone').value||'').trim();
+  var nt = (document.getElementById('iNote').value||'').trim();
+
+  var payload = {
+    name:    name,
+    email:   email,
+    phone:   ph,
+    day:     ds,
+    time:    S.time,
+    address: addr,
+    note:    nt
+  };
+  fetch(SHEET_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  }).catch(function(){});
+
+  var msg = 'שלום מעסה ידיו!\n\nבקשה לתור:\n'+
+    '👤 שם: '+name+'\n'+
+    '📅 יום: '+ds+'\n'+
+    '🕐 שעה: '+S.time+'\n'+
+    '🏠 כתובת: '+addr+'\n'+
+    '📧 מייל: '+email+
+    (ph?'\n📞 '+ph:'')+
+    (nt?'\n📝 '+nt:'')+
+    '\n\nתודה!';
+  openWA(msg);
+
+  document.querySelectorAll('.panel').forEach(function(p){p.classList.remove('on');});
+  document.getElementById('successBox').classList.add('on');
+  document.getElementById('stepLbl').textContent='הושלם ✓';
+  document.querySelectorAll('.dot').forEach(function(d){d.className='dot done';});
+}
+
+function resetAll(){
+  S.date=null; S.time=null; S.loc='ביקור בבית הלקוח';
+  document.getElementById('iName').value='';
+  document.getElementById('iEmail').value='';
+  document.getElementById('iAddr').value='';
+  document.getElementById('iPhone').value='';
+  document.getElementById('iNote').value='';
+  document.getElementById('successBox').classList.remove('on');
+  document.getElementById('to2').disabled=true;
+  document.getElementById('to3').disabled=true;
+  drawCal(); drawSlots(); goTo(1);
+}
+
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+</body>
+</html>
